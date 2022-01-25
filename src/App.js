@@ -17,6 +17,9 @@ function App() {
     loading: false,
   });
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
     <div className="App">
       <div
@@ -151,6 +154,26 @@ function App() {
             }
           />
           <button>Verify</button>
+        </form>
+      </div>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}>
+        <h3>Log in</h3>
+        <form onSubmit={async (e) => {
+          e.preventDefault();
+          const user = await Auth.signIn(email, password);
+          console.log(user);
+        }}>
+          <input placeholder="email" type='email' onChange={(e) => {
+            setEmail(e.target.value);
+          }}/>
+          <input placeholder="password" type='password' onChange={(e) => {
+            setPassword(e.target.value);
+          }} />
+          <button>Sign in</button>
         </form>
       </div>
     </div>
